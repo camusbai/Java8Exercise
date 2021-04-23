@@ -9,12 +9,12 @@ import java.util.Spliterator;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-public class SpliteratorCustomization {
+public class TestRun {
     public static void main(String[] args) throws URISyntaxException {
         Path path = Paths.get(ClassLoader.getSystemResource("People.txt").toURI());
         try (Stream<String> lines = Files.lines(path)) {
             Spliterator<String> lineSpliterator = lines.spliterator();
-            Spliterator<Person> personSpliterator = new PersonSpliterator(lineSpliterator);
+            PersonSpliterator personSpliterator = new PersonSpliterator(lineSpliterator);
             Stream<Person> personStream = StreamSupport.stream(personSpliterator, false);
             personStream.forEach(System.out::println);
         } catch (IOException e) {
